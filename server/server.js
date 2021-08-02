@@ -1,9 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
+//this was also moved to router, since this server file doesn't need it.
+//const bookList = [];
+
 const booksRouter = require('./routes/books.router')
 const app = express();
 const PORT = process.env.PORT || 5000;
-const bookList = [];
+
 const movieList = [];
 
 // express static file serving - public is the folder name
@@ -14,7 +18,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 //Tell my express app to use my booksRouter mini app
-app.use('/', booksRouter)
+//my book mini-app lives inside my 'book' url
+app.use('/book', booksRouter)
 
 // Start server listening on PORT
 app.listen(PORT, () => {
